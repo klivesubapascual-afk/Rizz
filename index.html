@@ -168,6 +168,7 @@
       border: 1px solid rgba(255,255,255,0.14);
       background: black;
       box-shadow: 0 18px 42px rgba(0,0,0,0.55);
+      display: block;
     }
 
     .hint {
@@ -224,7 +225,7 @@
     <div class="badge">🔥 Official Rizz Detector</div>
 
     <section id="questionSection">
-      <h1>Am I handsome? 😏</h1>
+      <h1>Am I pogi? 😏</h1>
       <p class="subtitle">Answer carefully. The wrong button has trust issues.</p>
 
       <div class="button-area" id="buttonArea">
@@ -236,14 +237,12 @@
     </section>
 
     <section class="video-section" id="videoSection">
-      <div class="result">I KNEW IT 😮‍💨🔥</div>
+      <div class="result">SABI KONA NGA BA EH 😮‍💨🔥</div>
 
       <video id="rizzVideo" controls playsinline>
         <source src="rizz.mp4" type="video/mp4">
         Your browser cannot play this video.
       </video>
-
-      <p class="hint">If the video does not play, make sure your file is named <b>rizz.mp4</b>.</p>
     </section>
   </main>
 
@@ -259,14 +258,42 @@
     let noClicks = 0;
     const noTexts = [
       "NO 💀",
-      "Wrong answer 😭",
-      "Try YES bro",
-      "You missed",
-      "Too slow",
-      "Just click YES"
+      "MALI NGA PUTA ❌",
+      "MAG YES KANA 😭",
+      "SUBUKAN MO LANG",
+      "8080 KABA? ",
+      "MAG YES KA NALNG KASI! 🙄"
     ];
 
+    function playBuzzer() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+
+      const audioCtx = new AudioContext();
+      const oscillator = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      oscillator.type = "sawtooth";
+      oscillator.frequency.setValueAtTime(180, audioCtx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.28);
+
+      gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.32);
+
+      oscillator.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + 0.32);
+    }
+
     function moveNoButton() {
+      playBuzzer();
+
+      if (navigator.vibrate) {
+        navigator.vibrate(90);
+      }
+
       const areaRect = buttonArea.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
