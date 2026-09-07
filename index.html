@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Valentine's Rizz Check</title>
   
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
@@ -278,11 +279,12 @@
     <div class="badge">💌 Official Valentine Rizz Detector</div>
 
     <section id="questionSection">
-      <h1>crush moba si nero? 💕</h1>
+      <h1>crush kita alam moba yon? 💕</h1>
       <p class="subtitle">Answer carefully. Cupid is watching you closely!</p>
 
+      <!-- Sad Bear Display Area -->
       <div class="bear-container">
-        <img id="sadBear" class="sad-bear" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm9sdGR4a3I4N3c0aWQzZXJ5MWFjcGdyczR3YzdrZnZrdXZuZ212ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L9523481W442A/giphy.gif" alt="Sad Teddy Bear">
+        <img id="sadBear" class="sad-bear" src="https://c.tenor.com/13454751/tenor.gif" alt="Sad Teddy Bear" onerror="handleBearError(this)">
       </div>
 
       <div class="button-area" id="buttonArea">
@@ -318,6 +320,12 @@
       }
     }
     createHeartParticles();
+
+    // Fallback if network blocks external GIF
+    function handleBearError(img) {
+      const svgFallback = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><circle cx="20" cy="25" r="14" fill="%23b07d5b"/><circle cx="80" cy="25" r="14" fill="%23b07d5b"/><circle cx="50" cy="50" r="35" fill="%23c4906c"/><circle cx="50" cy="55" r="16" fill="%23e6c3a5"/><circle cx="42" cy="45" r="3" fill="%23222"/><circle cx="58" cy="45" r="3" fill="%23222"/><ellipse cx="50" cy="52" rx="5" ry="3" fill="%23442a1d"/><path d="M 45 62 Q 50 58 55 62" stroke="%23442a1d" stroke-width="2" fill="none"/><path d="M 38 48 Q 36 55 35 60" stroke="%233a8bcd" stroke-width="2" fill="none"/></svg>';
+      img.src = svgFallback;
+    }
 
     const card = document.getElementById("card");
     const buttonArea = document.getElementById("buttonArea");
@@ -367,7 +375,7 @@
         navigator.vibrate(80);
       }
 
-      // Show the sad bear gif
+      // Show the sad bear
       sadBear.style.display = "block";
 
       const areaRect = buttonArea.getBoundingClientRect();
