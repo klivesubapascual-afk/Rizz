@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rizz Check</title>
+  <title>Valentine's Rizz Check</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -11,63 +15,89 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
     body {
       min-height: 100vh;
       overflow: hidden;
       color: #fff;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.25), transparent 35%),
-        radial-gradient(circle at 80% 30%, rgba(0, 183, 255, 0.22), transparent 35%),
-        linear-gradient(135deg, #050505, #111827 45%, #1a0b2e);
+      background: radial-gradient(circle at 50% 30%, #ff4b72 0%, #a80038 50%, #4a001d 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 18px;
+      position: relative;
     }
 
+    /* Floating Background Particle Hearts */
+    .heart-particle {
+      position: fixed;
+      bottom: -10vh;
+      color: rgba(255, 182, 193, 0.4);
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-115vh) rotate(360deg) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    /* Ambient Glow Spots */
     .glow {
       position: fixed;
-      width: 260px;
-      height: 260px;
+      width: 320px;
+      height: 320px;
       border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.45;
-      animation: float 6s ease-in-out infinite alternate;
+      filter: blur(90px);
+      opacity: 0.6;
+      animation: pulseGlow 5s ease-in-out infinite alternate;
       pointer-events: none;
     }
 
     .glow.one {
-      background: #ff007a;
-      top: -80px;
-      left: -80px;
+      background: #ff1744;
+      top: -100px;
+      left: -100px;
     }
 
     .glow.two {
-      background: #00c8ff;
-      bottom: -90px;
-      right: -70px;
-      animation-delay: 1s;
+      background: #ff80ab;
+      bottom: -100px;
+      right: -100px;
+      animation-delay: 2s;
     }
 
-    @keyframes float {
-      from { transform: translate(0, 0) scale(1); }
-      to { transform: translate(35px, -25px) scale(1.12); }
+    @keyframes pulseGlow {
+      from { transform: scale(1); opacity: 0.5; }
+      to { transform: scale(1.2); opacity: 0.8; }
     }
 
+    /* Main Glassmorphism Card */
     .card {
-      width: min(94vw, 760px);
-      min-height: 520px;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 28px;
-      background: rgba(10, 10, 18, 0.72);
-      box-shadow: 0 22px 60px rgba(0,0,0,0.55);
-      backdrop-filter: blur(18px);
-      padding: 28px;
+      width: min(94vw, 720px);
+      min-height: 540px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 32px;
+      background: rgba(45, 10, 24, 0.55);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 75, 114, 0.3);
+      backdrop-filter: blur(20px);
+      padding: 36px 28px;
       text-align: center;
       position: relative;
+      z-index: 10;
       overflow: hidden;
     }
 
@@ -75,77 +105,83 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 8px 18px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 13px;
-      letter-spacing: 0.4px;
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 22px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #ffe4e8;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     h1 {
-      font-size: clamp(34px, 8vw, 64px);
-      line-height: 1;
-      margin-bottom: 12px;
-      text-shadow: 0 0 24px rgba(255,255,255,0.18);
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(48px, 10vw, 76px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: #fff0f3;
+      text-shadow: 0 0 18px rgba(255, 182, 193, 0.6);
     }
 
     .subtitle {
-      color: rgba(255,255,255,0.72);
-      font-size: clamp(15px, 3vw, 18px);
-      margin-bottom: 24px;
+      color: #fcc2d7;
+      font-size: clamp(14px, 3vw, 17px);
+      margin-bottom: 20px;
+      font-weight: 400;
     }
 
     .button-area {
       position: relative;
       width: 100%;
-      height: 260px;
+      height: 250px;
       margin-top: 10px;
     }
 
     button {
       position: absolute;
       border: 0;
-      border-radius: 18px;
-      padding: 16px 32px;
-      font-size: 20px;
+      border-radius: 50px;
+      padding: 16px 36px;
+      font-size: 19px;
       font-weight: 800;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.2s ease, left 0.18s ease, top 0.18s ease;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, left 0.2s ease, top 0.2s ease;
       user-select: none;
     }
 
     button:active {
-      transform: scale(0.96);
+      transform: scale(0.95);
     }
 
     #yesBtn {
-      left: 25%;
-      top: 92px;
-      color: white;
-      background: linear-gradient(135deg, #00d26a, #00a3ff);
-      box-shadow: 0 14px 28px rgba(0, 210, 106, 0.25);
+      left: 22%;
+      top: 85px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      box-shadow: 0 10px 25px rgba(255, 65, 108, 0.5), 0 0 15px rgba(255, 255, 255, 0.4);
     }
 
     #noBtn {
-      left: 56%;
-      top: 92px;
-      color: white;
-      background: linear-gradient(135deg, #ff1744, #ff9100);
-      box-shadow: 0 14px 28px rgba(255, 23, 68, 0.25);
+      left: 58%;
+      top: 85px;
+      color: #4a001d;
+      background: linear-gradient(135deg, #ffffff, #ffe4e8);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
     .video-section {
       display: none;
-      animation: pop 0.45s ease forwards;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
 
-    @keyframes pop {
+    @keyframes popIn {
       from {
         opacity: 0;
-        transform: scale(0.94);
+        transform: scale(0.85);
       }
       to {
         opacity: 1;
@@ -154,27 +190,28 @@
     }
 
     .result {
-      font-size: clamp(28px, 6vw, 48px);
-      font-weight: 900;
-      margin-bottom: 16px;
-      color: #ffd166;
-      text-shadow: 0 0 20px rgba(255, 209, 102, 0.28);
+      font-size: clamp(24px, 5vw, 40px);
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: #fff0f3;
+      text-shadow: 0 0 15px rgba(255, 75, 114, 0.5);
     }
 
     video {
       width: 100%;
-      max-height: 58vh;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: black;
-      box-shadow: 0 18px 42px rgba(0,0,0,0.55);
+      max-height: 52vh;
+      border-radius: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: #000;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
       display: block;
     }
 
     .hint {
-      margin-top: 12px;
+      margin-top: 15px;
       font-size: 13px;
-      color: rgba(255,255,255,0.58);
+      color: #fcc2d7;
+      opacity: 0.8;
     }
 
     .shake {
@@ -191,27 +228,27 @@
 
     @media (max-width: 520px) {
       .card {
-        min-height: 500px;
-        padding: 22px;
+        min-height: 480px;
+        padding: 24px 18px;
       }
 
       .button-area {
-        height: 280px;
+        height: 260px;
       }
 
       button {
-        padding: 14px 25px;
-        font-size: 18px;
+        padding: 14px 28px;
+        font-size: 17px;
       }
 
       #yesBtn {
-        left: 13%;
-        top: 95px;
+        left: 10%;
+        top: 90px;
       }
 
       #noBtn {
-        left: 55%;
-        top: 95px;
+        left: 54%;
+        top: 90px;
       }
     }
   </style>
@@ -222,22 +259,22 @@
   <div class="glow two"></div>
 
   <main class="card" id="card">
-    <div class="badge">🔥 Official Rizz Detector</div>
+    <div class="badge">💌 Official Valentine Rizz Detector</div>
 
     <section id="questionSection">
-      <h1>crush moba si nero? </h1>
-      <p class="subtitle">Answer carefully. The wrong button has trust issues.</p>
+      <h1>crush moba si nero? 💕</h1>
+      <p class="subtitle">Answer carefully. Cupid is watching you closely!</p>
 
       <div class="button-area" id="buttonArea">
-        <button id="yesBtn">YES 😎</button>
-        <button id="noBtn">NO 💀</button>
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">NO 💔</button>
       </div>
 
-      <p class="hint">Tip: try pressing NO. I dare you.</p>
+      <p class="hint">Tip: Try pressing NO. Cupid won't let you. 😉</p>
     </section>
 
     <section class="video-section" id="videoSection">
-      <div class="result">NA INLOVE KA SA FACE KO NOH? 😮‍💨🔥</div>
+      <div class="result">NA INLOVE KA SA FACE KO NOH? 🌹✨</div>
 
       <video id="rizzVideo" controls playsinline>
         <source src="rizz.mp4" type="video/mp4">
@@ -247,6 +284,22 @@
   </main>
 
   <script>
+    // Create floating heart background particles dynamically
+    function createHeartParticles() {
+      const heartIcons = ["❤️", "💖", "💗", "💓", "💕", "🌸"];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart-particle";
+        heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+        heart.style.animationDelay = Math.random() * 5 + "s";
+        heart.style.fontSize = 16 + Math.random() * 18 + "px";
+        document.body.appendChild(heart);
+      }
+    }
+    createHeartParticles();
+
     const card = document.getElementById("card");
     const buttonArea = document.getElementById("buttonArea");
     const noBtn = document.getElementById("noBtn");
@@ -257,12 +310,12 @@
 
     let noClicks = 0;
     const noTexts = [
-      "NO 💀",
-      "KUNWARI KAPA ❌",
-      "MAG YES KANA 😭",
-      "SUBUKAN MO LANG",
-      "WAG KANA MAG KUNWARI", 
-      "MAG YES KA NALNG KASI! 🙄"
+      "NO 💔",
+      "KUNWARI KAPA 🤐",
+      "MAG YES KANA 😭💖",
+      "SUBUKAN MO LANG 🔥",
+      "WAG KANA MAG KUNWARI 🙈",
+      "MAG YES KA NALNG KASI! 🌹"
     ];
 
     function playBuzzer() {
@@ -273,25 +326,25 @@
       const oscillator = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
 
-      oscillator.type = "sawtooth";
-      oscillator.frequency.setValueAtTime(180, audioCtx.currentTime);
-      oscillator.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.28);
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(260, audioCtx.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(130, audioCtx.currentTime + 0.28);
 
-      gain.gain.setValueAtTime(0.22, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.32);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
 
       oscillator.connect(gain);
       gain.connect(audioCtx.destination);
 
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 0.32);
+      oscillator.stop(audioCtx.currentTime + 0.3);
     }
 
     function moveNoButton() {
       playBuzzer();
 
       if (navigator.vibrate) {
-        navigator.vibrate(90);
+        navigator.vibrate(80);
       }
 
       const areaRect = buttonArea.getBoundingClientRect();
@@ -327,7 +380,7 @@
 
       rizzVideo.currentTime = 0;
       rizzVideo.play().catch(function() {
-        // Some browsers block autoplay. User can press play manually.
+        // Autoplay safeguard for strict browsers
       });
     });
   </script>
