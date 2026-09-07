@@ -30,7 +30,7 @@
       position: relative;
     }
 
-    /* Floating Background Particle Hearts */
+    /* Floating Heart Particles */
     .heart-particle {
       position: fixed;
       bottom: -10vh;
@@ -55,7 +55,7 @@
       }
     }
 
-    /* Ambient Glow Spots */
+    /* Glow Effects */
     .glow {
       position: fixed;
       width: 320px;
@@ -85,10 +85,10 @@
       to { transform: scale(1.2); opacity: 0.8; }
     }
 
-    /* Main Glassmorphism Card */
+    /* Glassmorphism Card */
     .card {
       width: min(94vw, 720px);
-      min-height: 540px;
+      min-height: 560px;
       border: 1.5px solid rgba(255, 255, 255, 0.3);
       border-radius: 32px;
       background: rgba(45, 10, 24, 0.55);
@@ -113,7 +113,7 @@
       font-weight: 600;
       letter-spacing: 0.5px;
       color: #ffe4e8;
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
@@ -130,14 +130,36 @@
     .subtitle {
       color: #fcc2d7;
       font-size: clamp(14px, 3vw, 17px);
-      margin-bottom: 20px;
+      margin-bottom: 12px;
       font-weight: 400;
+    }
+
+    /* Sad Bear Styling */
+    .bear-container {
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .sad-bear {
+      max-height: 100px;
+      width: auto;
+      display: none;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+      animation: popBear 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popBear {
+      from { transform: scale(0) rotate(-10deg); opacity: 0; }
+      to { transform: scale(1) rotate(0deg); opacity: 1; }
     }
 
     .button-area {
       position: relative;
       width: 100%;
-      height: 250px;
+      height: 200px;
       margin-top: 10px;
     }
 
@@ -159,7 +181,7 @@
 
     #yesBtn {
       left: 22%;
-      top: 85px;
+      top: 60px;
       color: #fff;
       background: linear-gradient(135deg, #ff416c, #ff4b2b);
       box-shadow: 0 10px 25px rgba(255, 65, 108, 0.5), 0 0 15px rgba(255, 255, 255, 0.4);
@@ -167,7 +189,7 @@
 
     #noBtn {
       left: 58%;
-      top: 85px;
+      top: 60px;
       color: #4a001d;
       background: linear-gradient(135deg, #ffffff, #ffe4e8);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
@@ -179,14 +201,8 @@
     }
 
     @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: scale(0.85);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     .result {
@@ -208,7 +224,7 @@
     }
 
     .hint {
-      margin-top: 15px;
+      margin-top: 10px;
       font-size: 13px;
       color: #fcc2d7;
       opacity: 0.8;
@@ -228,12 +244,12 @@
 
     @media (max-width: 520px) {
       .card {
-        min-height: 480px;
+        min-height: 500px;
         padding: 24px 18px;
       }
 
       .button-area {
-        height: 260px;
+        height: 220px;
       }
 
       button {
@@ -243,12 +259,12 @@
 
       #yesBtn {
         left: 10%;
-        top: 90px;
+        top: 70px;
       }
 
       #noBtn {
         left: 54%;
-        top: 90px;
+        top: 70px;
       }
     }
   </style>
@@ -264,6 +280,10 @@
     <section id="questionSection">
       <h1>crush moba si nero? 💕</h1>
       <p class="subtitle">Answer carefully. Cupid is watching you closely!</p>
+
+      <div class="bear-container">
+        <img id="sadBear" class="sad-bear" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm9sdGR4a3I4N3c0aWQzZXJ5MWFjcGdyczR3YzdrZnZrdXZuZ212ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L9523481W442A/giphy.gif" alt="Sad Teddy Bear">
+      </div>
 
       <div class="button-area" id="buttonArea">
         <button id="yesBtn">YES 💖</button>
@@ -284,7 +304,6 @@
   </main>
 
   <script>
-    // Create floating heart background particles dynamically
     function createHeartParticles() {
       const heartIcons = ["❤️", "💖", "💗", "💓", "💕", "🌸"];
       for (let i = 0; i < 20; i++) {
@@ -304,6 +323,7 @@
     const buttonArea = document.getElementById("buttonArea");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+    const sadBear = document.getElementById("sadBear");
     const questionSection = document.getElementById("questionSection");
     const videoSection = document.getElementById("videoSection");
     const rizzVideo = document.getElementById("rizzVideo");
@@ -347,6 +367,9 @@
         navigator.vibrate(80);
       }
 
+      // Show the sad bear gif
+      sadBear.style.display = "block";
+
       const areaRect = buttonArea.getBoundingClientRect();
       const btnRect = noBtn.getBoundingClientRect();
 
@@ -380,7 +403,7 @@
 
       rizzVideo.currentTime = 0;
       rizzVideo.play().catch(function() {
-        // Autoplay safeguard for strict browsers
+        // Autoplay safeguard
       });
     });
   </script>
